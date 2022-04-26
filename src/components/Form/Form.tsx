@@ -2,28 +2,28 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import { useEffect, useState, ChangeEvent, FormEvent } from "react";
-import { ICheque } from "../../types";
+import { ITips } from "../../types";
 import { StyledForm, Title, Text, InputsContainer, Total } from "./style";
 import { IOptions } from "../../types/index";
 
 const Form = () => {
- const [cheque, setTotal] = useState<ICheque>({
+ const [tips, setTotal] = useState<ITips>({
   bill: "",
   persons: "",
   tip: { value: 0.1, label: "10%" },
   total: 0,
  });
 
- const { bill, persons, tip, total } = cheque;
+ const { bill, persons, tip, total } = tips;
 
  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
   const { value, name } = e.target;
-  setTotal({ ...cheque, [name]: value });
+  setTotal({ ...tips, [name]: value });
  };
 
  const handleSelect = (value: IOptions | null) => {
   if (value) {
-   setTotal({ ...cheque, tip: value });
+   setTotal({ ...tips, tip: value });
   }
  };
 
@@ -33,19 +33,19 @@ const Form = () => {
   const totalSum = (+bill * +tip.value) / +persons;
 
   if (bill && persons) {
-   setTotal({ ...cheque, total: totalSum });
+   setTotal({ ...tips, total: totalSum });
   }
  };
 
  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
  useEffect(() => {
-  if (cheque.bill > 0 && cheque.persons > 0) {
+  if (tips.bill > 0 && tips.persons > 0) {
    setIsDisabled(false);
   } else {
    setIsDisabled(true);
   }
- }, [cheque]);
+ }, [tips]);
 
  return (
   <StyledForm onSubmit={handleSubmit}>

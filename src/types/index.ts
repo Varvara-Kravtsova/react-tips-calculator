@@ -1,4 +1,4 @@
-export interface ICheque {
+export interface ITips {
  bill: string | number;
  persons: string | number;
  tip: IOptions;
